@@ -19,7 +19,7 @@ def generate_unique_number(guess_size: int) -> int:
             digit: int = random.randint(1, 9)
             contains_digit: bool = str(digit) in buffer
             if not contains_digit:
-                buffer = buffer + str(digit)
+                buffer += str(digit)
                 should_go_next = True
 
     return int(buffer)
@@ -30,8 +30,9 @@ def generate_unique_number(guess_size: int) -> int:
 """
 def get_user_guess(guess_size: int) -> int:
     is_fine: bool = False
+    user_guess: str = ''
     while not is_fine:
-        user_guess: str = input('Введите число: ')
+        user_guess = input('Введите число: ')
         is_correct_len: bool = len(user_guess) == guess_size
         is_fine = is_correct_len and user_guess.isdigit()
 
@@ -59,7 +60,7 @@ def get_bulls_count(user_guess: str, guess: str):
     bulls_count: int = 0
 
     for i in range(len(user_guess)):
-        has_digit: bool = guess.count(user_guess[i]) > 0
+        has_digit: bool = user_guess[i] in guess
         is_same_position: bool = user_guess[i] == guess[i]
         bulls_count = bulls_count + 1 if has_digit and not is_same_position else bulls_count
 

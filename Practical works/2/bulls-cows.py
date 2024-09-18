@@ -42,7 +42,7 @@ def get_user_guess(guess_size: int) -> int:
 """
 Возвращает число коров.
 """
-def get_cows_count(user_guess: str, guess: str):
+def get_cows_count(user_guess: str, guess: str) -> int:
     cows_count: int = 0
     index: int = 0
     for i in guess:
@@ -56,7 +56,7 @@ def get_cows_count(user_guess: str, guess: str):
 """
 Возвращает число быков.
 """
-def get_bulls_count(user_guess: str, guess: str):
+def get_bulls_count(user_guess: str, guess: str) -> int:
     bulls_count: int = 0
 
     for i in range(len(user_guess)):

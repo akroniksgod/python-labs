@@ -7,6 +7,7 @@ import random
 """
 SHOW_GUESSED_WORD: bool = True
 
+
 """
 Название файла со словами
 """
@@ -44,7 +45,7 @@ def has_latin_letters(word: str) -> bool:
 
 
 """
-Возвращает загаданное пользователем число
+Возвращает загаданное пользователем число.
 """
 def get_user_guess(word_size: int) -> str:
     is_fine: bool = False
@@ -83,7 +84,7 @@ def check_user_guess(user_word: str, guessed_word: str, attempt_count: int) -> b
 """
 Основная программа выполнения игры.
 """
-def wordle():
+def wordle() -> None:
     word: str = get_random_word()
     word_length: int = len(word)
     max_attempts: int = 6

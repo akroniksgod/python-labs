@@ -63,38 +63,28 @@ class Stack:
     __current_node: StackNode | None
 
     """
-    Количество элементов в стеке
-    """
-    _count: int
-
-    """
     Инициализация стека.
     """
     def __init__(self, value: T) -> None:
         self.__current_node = StackNode(value)
-        self._count = 1
 
     """
     Показывает стек.
     """
     def show(self) -> None:
         print("Просмотр стека")
-        count: int = self._count
-        stack_copy: StackNode | None = self.__current_node
-
-        while count > 0:
+        stack_copy: StackNode = self.__current_node
+        while stack_copy is not None:
             current_value = stack_copy.get_value()
             prev_node = stack_copy.get_prev_node()
             print(current_value)
             stack_copy = prev_node
-            count -= 1
         print()
 
     """
     Сохраняет узел на вершине стека.
     """
     def push(self, value: T) -> None:
-        self._count += 1
         new_node = StackNode(value)
         new_node.set_prev_node(self.__current_node)
         self.__current_node = new_node
@@ -103,13 +93,9 @@ class Stack:
     Удаляет узел с вершины стека.
     """
     def pop(self) -> None:
-        if self._count == 0:
-            pass
-
         prev_node = self.__current_node.get_prev_node()
         self.__current_node.set_value(None)
         self.__current_node = prev_node
-        self._count -= 1
 
 
 if __name__ == '__main__':

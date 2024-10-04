@@ -19,7 +19,7 @@ class StackNode:
     """
     Указатель на прошлый элемент.
     """
-    __prev_node: StackNode
+    __prev_node: StackNode | None
 
     """
     Инициализация узла стека.
@@ -37,25 +37,36 @@ class StackNode:
     """
     Возвращает прошлый узел.
     """
-    def get_prev_node(self) -> StackNode:
+    def get_prev_node(self) -> StackNode | None:
         return self.__prev_node
 
     """
     Сохраняет значение узла.
     """
-    def set_value(self, value) -> None:
+    def set_value(self, value: T) -> None:
         self.__value = value
 
     """
     Сохраняет прошлый узел.
     """
-    def set_prev_node(self, node) -> None:
+    def set_prev_node(self, node: StackNode | None) -> None:
         self.__prev_node = node
+
 
 """
 Стек.
 """
 class Stack:
+    """
+    Текущий узел стека (последний вошедший элемент).
+    """
+    __current_node: StackNode | None
+
+    """
+    Количество элементов в стеке
+    """
+    _count: int
+
     """
     Инициализация стека.
     """
@@ -68,8 +79,8 @@ class Stack:
     """
     def show(self) -> None:
         print("Просмотр стека")
-        count = self._count
-        stack_copy = self.__current_node
+        count: int = self._count
+        stack_copy: StackNode | None = self.__current_node
 
         while count > 0:
             current_value = stack_copy.get_value()

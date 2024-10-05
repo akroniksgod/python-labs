@@ -9,7 +9,7 @@ class PartTimeStudent(Student):
     """
     Номер зачётной книжки.
     """
-    __card_number: str
+    _card_number: str
 
     """
     Возвращает строку с данными о студенте заочнике.
@@ -17,7 +17,7 @@ class PartTimeStudent(Student):
     def __str__(self):
         parent = super().__str__()
         return f"{parent}," \
-               f" с зачётной книжкой {self.__card_number}"
+               f" с зачётной книжкой {self._card_number}"
 
     """
     Возвращает строку для отладки.
@@ -25,4 +25,4 @@ class PartTimeStudent(Student):
     def __repr__(self):
         parent = super().__repr__()
         return f"{parent}\n" \
-               f"Номер зачётной книжки: {self.__card_number}.\n"
+               f"Номер зачётной книжки: {self._card_number}.\n"

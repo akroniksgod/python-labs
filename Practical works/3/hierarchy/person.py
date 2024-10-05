@@ -8,36 +8,36 @@ class Person:
     """
     Имя.
     """
-    __name: str
+    _name: str
 
     """
     Фамилия.
     """
-    __surname: str
+    _surname: str
 
     """
     Возраст.
     """
-    __age: int
+    _age: int
 
     """
     Пол.
     """
-    __gender: bool
+    _gender: bool
 
     """
     Возвращает строку с данными о персоне.
     """
     def __str__(self):
-        return f'{self.__surname} {self.__name},' \
-               f' {"мужчина" if self.__gender else "женщина"},' \
-               f' {self.__age} лет'
+        return f'{self._surname} {self._name},' \
+               f' {"мужчина" if self._gender else "женщина"},' \
+               f' {self._age} лет'
 
     """
     Возвращает строку для отладки.
     """
     def __repr__(self):
-        return f'Фамилия: {self.__surname};\n' \
-               f'Имя: {self.__name};\n' \
-               f'Пол: {"мужчина" if self.__gender else "женщина"};\n' \
-               f'Возраст: {self.__age} лет;'
+        return f'Фамилия: {self._surname};\n' \
+               f'Имя: {self._name};\n' \
+               f'Пол: {"мужчина" if self._gender else "женщина"};\n' \
+               f'Возраст: {self._age} лет;'

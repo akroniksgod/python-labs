@@ -153,6 +153,27 @@ class City:
         self.__pow__(other)
         return City(self._people)
 
+    """
+    Перегрузка '%'.
+    Сокращает население на остаток от деления всего населения.
+    """
+    def __mod__(self, other: int) -> None:
+        if not isinstance(other, int):
+            pass
+        new_count: int = len(self._people) % other
+        for i in range(new_count):
+            self._people.remove(random.choice(self._people))
+
+    """
+    Перегрузка '%='.
+    Сокращает население на остаток от деления всего населения.
+    """
+    def __imod__(self, other: int) -> City:
+        if not isinstance(other, int):
+            pass
+        self.__mod__(other)
+        return City(self._people)
+
 
 if __name__ == '__main__':
     # Создаём город
@@ -214,3 +235,12 @@ if __name__ == '__main__':
     # Умножает население в 2 раза
     city **= 2
     city.show('**=')
+
+    # Уменьшает население (9 чел) на остаток от деления (1 чел)
+    city % 2
+    city.show('%')
+
+    # Уменьшает население (8 чел) на остаток от деления (2 чел)
+    city %= 3
+    city.show('%=')
+    

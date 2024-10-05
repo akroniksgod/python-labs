@@ -17,13 +17,13 @@ class Pupil(Person):
     __year: int
 
     """
-    Возвращает строку с данными о персоне.
+    Возвращает строку с данными о школьнике.
     """
     def __str__(self):
         parent_info = super().__str__()
         return f'{parent_info},' \
                f' из школы {self.__school_name},' \
-               f' в {self.__year} классе.'
+               f' в {self.__year} классе'
 
     """
     Возвращает строку для отладки.

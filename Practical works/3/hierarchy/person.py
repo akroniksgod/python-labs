@@ -86,7 +86,7 @@ class Person:
         if not isinstance(other, Person):
             return False
         is_same_name: bool = self._name == other._name
-        is_same_surname: bool = self._name == other._surname
+        is_same_surname: bool = self._surname == other._surname
         is_same_age: bool = self._age == other._age
         is_same_gender: bool = self._gender == other._gender
         return is_same_name and is_same_surname and is_same_age and is_same_gender

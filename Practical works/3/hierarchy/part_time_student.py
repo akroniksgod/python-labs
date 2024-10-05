@@ -13,6 +13,14 @@ class PartTimeStudent(Student):
     _card_number: str
 
     """
+    Сохраняет номер зачётной книжки.
+    """
+    def set_card_number(self, card_number: str) -> None:
+        if not isinstance(card_number, str):
+            pass
+        self._card_number = card_number
+
+    """
     Возвращает строку с данными о студенте заочнике.
     """
     def __str__(self) -> str:

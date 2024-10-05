@@ -18,6 +18,22 @@ class Pupil(Person):
     _year: int
 
     """
+    Сохраняет название школы.
+    """
+    def set_school_name(self, school_name: str) -> None:
+        if not isinstance(school_name, str):
+            pass
+        self._school_name = school_name
+
+    """
+    Сохраняет год обучения.
+    """
+    def set_year(self, year: int) -> None:
+        if not isinstance(year, int):
+            pass
+        self._year = year
+
+    """
     Возвращает строку с данными о школьнике.
     """
     def __str__(self) -> str:

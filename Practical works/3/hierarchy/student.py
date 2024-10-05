@@ -18,6 +18,22 @@ class Student(Pupil):
     _major_name: str
 
     """
+    Сохраняет название группы.
+    """
+    def set_school_name(self, group_name: str) -> None:
+        if not isinstance(group_name, str):
+            pass
+        self._group_name = group_name
+
+    """
+    Сохраняет название специальности.
+    """
+    def set_major_name(self, major_name: str) -> None:
+        if not isinstance(major_name, str):
+            pass
+        self._major_name = major_name
+
+    """
     Возвращает строку с данными о студенте.
     """
     def __str__(self) -> str:

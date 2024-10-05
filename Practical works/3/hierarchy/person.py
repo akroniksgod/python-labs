@@ -27,6 +27,42 @@ class Person:
     _gender: bool
 
     """
+    Сохраняет имя.
+    """
+    def set_name(self, name: str) -> None:
+        if not isinstance(name, str):
+            pass
+        self._name = name
+
+    """
+    Сохраняет фамилию.
+    """
+    def set_surname(self, surname: str) -> None:
+        if not isinstance(surname, str):
+            pass
+        self._surname = surname
+
+    """
+    Сохраняет возраст.
+    """
+    def set_age(self, age: int) -> None:
+        if not isinstance(age, int):
+            pass
+        self._age = age
+
+    """
+    Сохраняет пол.
+    """
+    def set_gender(self, gender: bool) -> None:
+        res: bool = gender
+        if isinstance(gender, str):
+            gen = gender.lower()
+            res = gen == 'm' or gen == 'м' or gen == 'муж'
+        elif not isinstance(gender, bool):
+            pass
+        self._gender = res
+
+    """
     Возвращает строку с данными о персоне.
     """
     def __str__(self) -> str:

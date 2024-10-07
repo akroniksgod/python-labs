@@ -55,7 +55,7 @@ if __name__ == '__main__':
         global is_running
         is_running = False
 
-    menu_options = {
+    menu_options: dict = {
         '1': task_list.add,
         '2': task_list.change,
         '3': task_list.change_checked,
@@ -69,5 +69,5 @@ if __name__ == '__main__':
     while is_running:
         # cls()
         task_list.show()
-        choice = input(get_menu_options())
+        choice: str = input(get_menu_options())
         menu_options[choice]()

@@ -11,9 +11,9 @@ json_name: str = 'tasks.json'
 Список задач.
 """
 class TaskList:
-    '''
+    """
     Список задач.
-    '''
+    """
     _tasks: list[Task]
 
     '''
@@ -82,9 +82,9 @@ class TaskList:
     '''
     def add(self) -> None:
         print('\nСоздание задачи')
-        name = input('\tНазвание: ')
-        category = input('\tКатегория: ')
-        description = input('\tОписание: ')
+        name: str = input('\tНазвание: ')
+        category: str = input('\tКатегория: ')
+        description: str = input('\tОписание: ')
         checked = False
         new_task = Task(name, description, category, checked)
         self.append(new_task)
@@ -95,19 +95,19 @@ class TaskList:
     '''
     def change(self) -> None:
         print('\nРедактирование задачи')
-        position = input('\tВведите номер задачи: ')
-        index = int(position) - 1
+        position: str = input('\tВведите номер задачи: ')
+        index: int = int(position) - 1
         if index < 0 or index >= len(self._tasks):
             print('Не удалось внести изменения!\n')
             return
-        task = self._tasks[index]
+        task: Task = self._tasks[index]
         print(f'\t{task}')
-        choice = input('\t1. Изменить название;\n'
-              '\t2. Изменить описание;\n'
-              '\t3. Изменить категорию.\n'
-              '\t>')
-        new_value = input('\tНовое значение: ')
-        options = {
+        choice: str = input('\t1. Изменить название;\n'
+                            '\t2. Изменить описание;\n'
+                            '\t3. Изменить категорию.\n'
+                            '\t>')
+        new_value: str = input('\tНовое значение: ')
+        options: dict = {
             '1': task.set_name,
             '2': task.set_description,
             '3': task.set_category,
@@ -119,14 +119,15 @@ class TaskList:
     Удаляет задачу из списка задач по названию.
     '''
     def _remove_task_by_name(self) -> None:
-        name = input('\n\tНазвание: ').lower()
+        name: str = input('\n\tНазвание: ').lower()
         self._tasks = filter(lambda x: str(x.name).lower() == name, self._tasks)
 
     '''
     Удаляет задачу из списка задач по индексу.
     '''
     def _remove_task_by_index(self) -> None:
-        index = int(input('\n\tНомер: ')) - 1
+        position: str = input('\n\tНомер: ')
+        index: int = int(position) - 1
         self._tasks.pop(index)
 
     '''
@@ -134,9 +135,9 @@ class TaskList:
     '''
     def remove(self) -> None:
         print('\nУдаление задачи')
-        choice = input('\t1. Удалить по номеру;\n'
-                       '\t2. Удалить по названию.\n'
-                       '\t>')
+        choice: str = input('\t1. Удалить по номеру;\n'
+                            '\t2. Удалить по названию.\n'
+                            '\t>')
 
         if choice == '1':
             self._remove_task_by_index()
@@ -148,16 +149,18 @@ class TaskList:
     Отмечает задачу из списка задач по названию.
     '''
     def _change_checked_by_task_name(self) -> None:
-        name = input('\n\tНазвание: ').lower()
-        selected_task = filter(lambda task: task.get_name().lower() == name, self._tasks)[0]
+        name: str = input('\n\tНазвание: ').lower()
+        filtered_tasks: list[Task] = filter(lambda task: task.get_name().lower() == name, self._tasks)
+        selected_task: Task = filtered_tasks[0]
         selected_task.set_checked(not selected_task.get_checked())
 
     '''
     Отмечает задачу из списка задач по индексу.
     '''
     def _change_checked_by_task_index(self) -> None:
-        index = int(input('\n\tНомер: ')) - 1
-        task = self._tasks[index]
+        position: str = input('\n\tНомер: ')
+        index: int = int(position) - 1
+        task: Task = self._tasks[index]
         task.set_checked(not task.get_checked())
 
     '''
@@ -165,9 +168,9 @@ class TaskList:
     '''
     def change_checked(self) -> None:
         print('\nОтменить задачу')
-        choice = input('\t1. Отменить по номеру;\n'
-                       '\t2. Отменить по названию.\n'
-                       '\t>')
+        choice: str = input('\t1. Отменить по номеру;\n'
+                            '\t2. Отменить по названию.\n'
+                            '\t>')
         if choice == '1':
             self._change_checked_by_task_index()
         elif choice == '2':
@@ -179,8 +182,9 @@ class TaskList:
     '''
     def filter_by_category(self) -> None:
         print('\nФильтрация задач')
-        category = input('>').lower()
-        tasks = TaskList(filter(lambda task: category in task.get_category().lower(), self._tasks))
+        category: str = input('>').lower()
+        filtered_tasks: list[Task] = filter(lambda task: category in task.get_category().lower(), self._tasks)
+        tasks = TaskList(filtered_tasks)
         TaskList.show_tasks(tasks)
 
     '''
@@ -188,6 +192,7 @@ class TaskList:
     '''
     def filter_by_name(self) -> None:
         print('\nПоиск по задачам')
-        name = input('>').lower()
-        tasks = TaskList(filter(lambda task: name in task.get_name().lower(), self._tasks))
+        name: str = input('>').lower()
+        filtered_tasks: list[Task] = filter(lambda task: name in task.get_name().lower(), self._tasks)
+        tasks = TaskList(filtered_tasks)
         TaskList.show_tasks(tasks)

@@ -17,14 +17,9 @@ class TaskList:
     _tasks: list[Task]
 
     '''
-    Категория.
-    '''
-    _category: str
-
-    '''
     Инициализирует список задач.
     '''
-    def __init__(self, tasks: list[Task] = ()):
+    def __init__(self, tasks: list[Task] = ()) -> None:
         self._tasks = tasks
 
     '''
@@ -56,7 +51,7 @@ class TaskList:
     '''
     Возвращает список объектов.
     '''
-    def _to_dist_list(self) -> list[dict]:
+    def _to_dict_list(self) -> list[dict]:
         return [task.to_dict() for task in self._tasks]
 
     '''
@@ -64,7 +59,7 @@ class TaskList:
     '''
     def save(self) -> None:
         with open(json_name, 'w', encoding='utf-8') as f:
-            json.dump(self._to_dist_list(), f, indent=4)
+            json.dump(self._to_dict_list(), f, indent=4)
             print('Изменения сохранены!\n')
 
     '''
@@ -79,7 +74,7 @@ class TaskList:
     '''
     Добавляет задачу в список задач.
     '''
-    def append(self, task: Task):
+    def append(self, task: Task) -> None:
         self._tasks.append(task)
 
     '''
@@ -98,7 +93,7 @@ class TaskList:
     '''
     Редактирует задачу в список задач.
     '''
-    def change(self):
+    def change(self) -> None:
         print('\nРедактирование задачи')
         position = input('\tВведите номер задачи: ')
         task = self._tasks[int(position) - 1]
@@ -119,14 +114,14 @@ class TaskList:
     '''
     Удаляет задачу из списка задач по названию.
     '''
-    def _remove_by_task_name(self) -> None:
+    def _remove_task_by_name(self) -> None:
         name = input('\n\tНазвание: ').lower()
         self._tasks = filter(lambda x: str(x.name).lower() == name, self._tasks)
 
     '''
     Удаляет задачу из списка задач по индексу.
     '''
-    def _remove_by_task_index(self) -> None:
+    def _remove_task_by_index(self) -> None:
         index = int(input('\n\tНомер: ')) - 1
         self._tasks.pop(index)
 
@@ -140,9 +135,9 @@ class TaskList:
                        '\t>')
 
         if choice == '1':
-            self._remove_by_task_index()
+            self._remove_task_by_index()
         elif choice == '2':
-            self._remove_by_task_name()
+            self._remove_task_by_name()
         self.save()
 
     '''

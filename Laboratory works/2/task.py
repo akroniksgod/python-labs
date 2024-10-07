@@ -31,7 +31,10 @@ class Task:
     Возвращает представление объекта в виде строки.
     """
     def __str__(self) -> str:
-        return f'[{'x' if self.__checked else ' '}] {self.__name} #{self.__category}'
+        category = f' #{self.__category}'
+        return (f'[{'x' if self.__checked else ' '}] '
+                f'{self.__name}'
+                f'{category if len(self.__category) > 0 else ''}')
 
     """
     Возвращает результат проверки на равенство объектов.
@@ -109,6 +112,18 @@ class Task:
         }
 
     '''
+    Возвращает объект класса Задача из словаря.
+    '''
+    @staticmethod
+    def from_dict(dict_task: dict) -> Task:
+        return Task(
+            dict_task['name'],
+            dict_task['description'],
+            dict_task['category'],
+            dict_task['checked'],
+        )
+
+    '''
     Сохраняет задачу в файл json.
     !!! Нужен только для тестов.
     '''
@@ -124,9 +139,4 @@ class Task:
     def _load(file_name: str) -> Task:
         with open(file_name, 'r', encoding='utf-8') as f:
             json_task = json.load(f)
-            return Task(
-                json_task['name'],
-                json_task['description'],
-                json_task['category'],
-                json_task['checked'],
-            )
+            return Task.from_dict(json_task)

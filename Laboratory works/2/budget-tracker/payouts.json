@@ -1,0 +1,32 @@
+[
+    {
+        "name": "\u0412\u044b\u043f\u043b\u0430\u0442\u0430 1",
+        "amount": "19150.5999999999985448084771633148193359375",
+        "category": "test",
+        "description": ""
+    },
+    {
+        "name": "\u041d\u043e\u0443\u0442\u0431\u0443\u043a",
+        "amount": "97894.88949000000138767063617706298828125",
+        "category": "test",
+        "description": ""
+    },
+    {
+        "name": "\u0412\u044b\u043f\u043b\u0430\u0442\u0430 3",
+        "amount": "4985.5500000000001818989403545856475830078125",
+        "category": "test",
+        "description": ""
+    },
+    {
+        "name": "\u0425\u043b\u0435\u0431",
+        "amount": "50.12599999999999766941982670687139034271240234375",
+        "category": "groceries",
+        "description": ""
+    },
+    {
+        "name": "\u041a\u043e\u043b\u0430",
+        "amount": "111.5532",
+        "category": "groceries",
+        "description": ""
+    }
+]

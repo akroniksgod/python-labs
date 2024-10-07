@@ -39,16 +39,21 @@ def get_menu_options() -> str:
 
 
 if __name__ == '__main__':
-    tasks: list[Task] = TaskList.get_saved_tasks(json_name)
+    tasks: list[Task] = []
+    try:
+        tasks = TaskList.get_saved_tasks(json_name)
+    except FileNotFoundError:
+        tasks = generate_tasks()
     task_list = TaskList(tasks)
+
+    def load_tasks() -> None:
+        task_list.get_saved_tasks(json_name)
+
     is_running: bool = True
 
     def close() -> None:
         global is_running
         is_running = False
-
-    def load_tasks() -> None:
-        task_list.get_saved_tasks(json_name)
 
     menu_options = {
         '1': task_list.add,

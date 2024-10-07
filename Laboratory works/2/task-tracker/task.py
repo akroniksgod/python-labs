@@ -65,7 +65,7 @@ class Task:
         return self.__description
 
     """
-    Возвращает название задачи. 
+    Возвращает флаг задачи. 
     """
     def get_checked(self) -> bool:
         return self.__checked
@@ -95,7 +95,7 @@ class Task:
         self.__checked = checked
 
     """
-    Сохраняет описание задачи. 
+    Сохраняет категорию задачи. 
     """
     def set_category(self, category: str) -> None:
         self.__category = category

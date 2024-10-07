@@ -96,8 +96,12 @@ class TaskList:
     def change(self) -> None:
         print('\nРедактирование задачи')
         position = input('\tВведите номер задачи: ')
-        task = self._tasks[int(position) - 1]
-
+        index = int(position) - 1
+        if index < 0 or index >= len(self._tasks):
+            print('Не удалось внести изменения!\n')
+            return
+        task = self._tasks[index]
+        print(f'\t{task}')
         choice = input('\t1. Изменить название;\n'
               '\t2. Изменить описание;\n'
               '\t3. Изменить категорию.\n'

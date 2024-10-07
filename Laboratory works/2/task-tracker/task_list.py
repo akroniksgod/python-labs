@@ -120,7 +120,7 @@ class TaskList:
     '''
     def _remove_task_by_name(self) -> None:
         name: str = input('\n\tНазвание: ').lower()
-        self._tasks = filter(lambda x: str(x.name).lower() == name, self._tasks)
+        self._tasks = list(filter(lambda x: str(x.name).lower() == name, self._tasks))
 
     '''
     Удаляет задачу из списка задач по индексу.

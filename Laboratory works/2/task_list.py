@@ -1,3 +1,4 @@
+from __future__ import annotations
 from task import Task
 import json
 
@@ -14,6 +15,11 @@ class TaskList:
     Список задач.
     '''
     _tasks: list[Task]
+
+    '''
+    Категория.
+    '''
+    _category: str
 
     '''
     Инициализирует список задач.
@@ -38,6 +44,14 @@ class TaskList:
     def show(self) -> None:
         print('Задачи:')
         print(self.__str__())
+
+    '''
+    Показать список переданный задач в консоли.
+    '''
+    @staticmethod
+    def show_tasks(tasks: TaskList) -> None:
+        print('Задачи:')
+        print(tasks.__str__())
 
     '''
     Возвращает список объектов.
@@ -136,8 +150,8 @@ class TaskList:
     '''
     def _change_checked_by_task_name(self) -> None:
         name = input('\n\tНазвание: ').lower()
-        task = filter(lambda x: str(x.name).lower() == name, self._tasks)[0]
-        task.set_checked(not task.get_checked())
+        selected_task = filter(lambda task: task.get_name().lower() == name, self._tasks)[0]
+        selected_task.set_checked(not selected_task.get_checked())
 
     '''
     Отмечает задачу из списка задач по индексу.
@@ -160,3 +174,21 @@ class TaskList:
         elif choice == '2':
             self._change_checked_by_task_name()
         self.save()
+
+    '''
+    Фильтрует задачи по категории.
+    '''
+    def filter_by_category(self) -> None:
+        print('\nФильтрация задач')
+        category = input('>').lower()
+        tasks = TaskList(filter(lambda task: category in task.get_category().lower(), self._tasks))
+        TaskList.show_tasks(tasks)
+
+    '''
+    Фильтрация по названию задачи.
+    '''
+    def filter_by_name(self) -> None:
+        print('\nПоиск по задачам')
+        name = input('>').lower()
+        tasks = TaskList(filter(lambda task: name in task.get_name().lower(), self._tasks))
+        TaskList.show_tasks(tasks)

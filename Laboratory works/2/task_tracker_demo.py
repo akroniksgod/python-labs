@@ -4,11 +4,17 @@ from task import Task
 # import subprocess
 
 
+'''
+Очищает консоль.
+'''
 # def cls():
 #     subprocess.call('cls' if os.name == 'nt' else 'clear', shell=True)
 #     subprocess.call('powershell -Command Clear-Host', shell=True)
 
 
+'''
+Генерирует список задач.
+'''
 def generate_tasks() -> list[Task]:
     task_list: list[Task] = []
     task_list.append(Task('Тест 1', '', '', False))
@@ -17,13 +23,18 @@ def generate_tasks() -> list[Task]:
     return task_list
 
 
+'''
+Возвращает опции в меню.
+'''
 def get_menu_options() -> str:
     return (f'1. Создать задачу;\n'
             f'2. Изменить задачу;\n'
             f'3. Отметить задачу;\n'
             f'4. Удалить задачу;\n'
             f'5. Выгрузить задачи из json;\n'
-            f'6. Закрыть.\n'
+            f'6. Фильтрация по категориям;\n'
+            f'7. Поиск по названию;\n'
+            f'8. Закрыть.\n'
             f'>')
 
 
@@ -45,7 +56,9 @@ if __name__ == '__main__':
         '3': task_list.change_checked,
         '4': task_list.remove,
         '5': load_tasks,
-        '6': close,
+        '6': task_list.filter_by_category,
+        '7': task_list.filter_by_name,
+        '8': close,
     }
 
     while is_running:

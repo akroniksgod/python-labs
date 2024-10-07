@@ -68,7 +68,7 @@ class TaskList:
     @staticmethod
     def get_saved_tasks(file_name: str) -> list[Task]:
         with open(file_name) as json_data:
-            task_dict_list = json.load(json_data)
+            task_dict_list: list[dict] = json.load(json_data)
             return list(map(lambda task: Task.from_dict(task), task_dict_list))
 
     '''
@@ -85,7 +85,7 @@ class TaskList:
         name: str = input('\tНазвание: ')
         category: str = input('\tКатегория: ')
         description: str = input('\tОписание: ')
-        checked = False
+        checked: bool = False
         new_task = Task(name, description, category, checked)
         self.append(new_task)
         self.save()

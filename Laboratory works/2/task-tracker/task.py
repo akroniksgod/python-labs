@@ -31,7 +31,7 @@ class Task:
     Возвращает представление объекта в виде строки.
     """
     def __str__(self) -> str:
-        category = f' #{self.__category}'
+        category: str = f' #{self.__category}'
         return (f'[{'x' if self.__checked else ' '}] '
                 f'{self.__name}'
                 f'{category if len(self.__category) > 0 else ''}')
@@ -44,7 +44,7 @@ class Task:
         is_same_description: bool = self.__description == other.__description
         is_same_category: bool = self.__category == other.__category
         is_same_checked: bool = self.__checked == other.__checked
-        return is_same_name and is_same_description and is_same_checked and is_same_category
+        return is_same_name and is_same_description and is_same_category and is_same_checked
 
     """
     Возвращает результат проверки на неравенство объектов.
@@ -107,8 +107,8 @@ class Task:
         return {
             "name": self.__name,
             "description": self.__description,
-            "checked": self.__checked,
             "category": self.__category,
+            "checked": self.__checked,
         }
 
     '''
@@ -128,7 +128,7 @@ class Task:
     !!! Нужен только для тестов.
     '''
     def _save(self) -> None:
-        with open('json_task_' + self.__name, 'w', encoding='utf-8') as f:
+        with open(f'json_task_{self.__name}', 'w', encoding='utf-8') as f:
             json.dump(self.to_dict(), f, indent=4)
 
     '''
@@ -138,5 +138,5 @@ class Task:
     @staticmethod
     def _load(file_name: str) -> Task:
         with open(file_name, 'r', encoding='utf-8') as f:
-            json_task = json.load(f)
+            json_task: dict = json.load(f)
             return Task.from_dict(json_task)

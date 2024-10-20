@@ -50,7 +50,7 @@ class DNACompressor:
     Выполняет сжатие ДНК.
     '''
     def _compress(self, dna_sequence: str) -> bin:
-        compressed = 0
+        compressed: bin = 0
         for nucleotide in dna_sequence:
             compressed <<= 2
             compressed |= DNA_BINARY_CODES[nucleotide]
@@ -60,10 +60,10 @@ class DNACompressor:
     Выполняет распаковку ДНК.
     '''
     def _decompress(self) -> str:
-        dna_sequence = []
-        compressed = self.__compressed_dna_sequence
+        dna_sequence: list[bin] = []
+        compressed: bin = self.__compressed_dna_sequence
         for _ in range(self.__original_length):
-            nucleotide_bits = compressed & 0b11
+            nucleotide_bits: bin = compressed & 0b11
             dna_sequence.append(DNA_CODES[nucleotide_bits])
             compressed >>= 2
         return ''.join(dna_sequence[::-1])

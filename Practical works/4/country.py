@@ -2,9 +2,9 @@ from __future__ import annotations
 from typing import List, Dict
 from attr import dataclass
 
-"""
+'''
 Страна.
-"""
+'''
 @dataclass
 class Country:
     '''

@@ -168,6 +168,7 @@ def show_countries(countries: List[Country], message = "") -> None:
     len(message) > 0 and print(message)
     for country in countries:
         print(country)
+    print()
 
 
 '''
@@ -197,16 +198,28 @@ def collect_language_countries(countries: List[Country]) -> Dict[str, List[str]]
 '''
 Печатает список распространенных языков и где их используют.
 '''
-def show_top_n_countries(countries: List[Country], n: int) -> None:
+def show_top_n_languages(countries: List[Country], n: int) -> None:
     language_count: Dict[str, int] = count_languages(countries)
     language_countries: Dict[str, List[str]] = collect_language_countries(countries)
     sorted_languages: List[Tuple[str, int]] = sorted(language_count.items(), key=lambda x: x[1], reverse=True)
     top_n_languages_list: List[Tuple[str, int]] = sorted_languages[:n]
 
+    print("10.2 Список самых распространённых языков")
     for language, count in top_n_languages_list:
-        print(f"Язык: {language}, Количество стран: {count}")
-        print(f"Страны: {', '.join(language_countries[language])}")
-        print()
+        print(f"\tЯзык: {language}, Количество стран: {count} ({', '.join(language_countries[language])})")
+    print()
+
+
+'''
+Печатает список самых населённых стран.
+'''
+def show_top_n_countries_by_population(countries: List[Country], n: int) -> None:
+    sorted_countries_by_population: List[Country] = sorted(countries, key=lambda country: country.population, reverse=True)
+    top_n_population_list: List[Country] = sorted_countries_by_population[:n]
+    print("10.3 Список самых населённых стран")
+    for country in top_n_population_list:
+        print(f"\tСтрана: {country.name}, население: {country.population}")
+    print()
 
 
 '''
@@ -224,7 +237,9 @@ def process_countries_data() -> None:
     sorted_countries = sorted(countries, key=lambda country: country.population)
     show_countries(sorted_countries, '10.1.3 Сортировка по населению')
 
-    show_top_n_countries(countries, 10)
+    n = 10
+    show_top_n_languages(countries, n)
+    show_top_n_countries_by_population(countries, n)
 
 
 if __name__ == '__main__':

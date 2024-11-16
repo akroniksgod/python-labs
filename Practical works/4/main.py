@@ -1,6 +1,12 @@
 import json
 from functools import reduce
-from typing import List, Dict, Callable
+from typing import List, Dict, Callable, TypeVar
+from country import Country
+
+'''
+Шаблонный тип.
+'''
+T = TypeVar('T')
 
 '''
 Название файла со странами.
@@ -8,17 +14,24 @@ from typing import List, Dict, Callable
 COUNTRIES_FILE_NAME = "countries.json"
 
 '''
-Путь к файлу со странами.
+Название файла со странами.
 '''
-COUNTRIES_FILE_PATH = "./data/" + COUNTRIES_FILE_NAME
+COUNTRIES_DATA_FILE_NAME = "countries-data.json"
+
+
+'''
+Возвращает путь к файлу со странами.
+'''
+def get_file_path(file_name: str) -> str:
+    return "./data/" + file_name
 
 
 '''
 Возвращает список стран.
 '''
-def get_countries() -> List[str]:
-    f = open(COUNTRIES_FILE_PATH, encoding="utf-8")
-    countries: List[str] = json.load(f)
+def get_countries(file_name: str) -> T:
+    f = open(get_file_path(file_name), encoding="utf-8")
+    countries: T = json.load(f)
     f.close()
     return countries
 
@@ -147,9 +160,35 @@ def currying_test(countries: List[str]) -> None:
     print(f"9.4 stans: {stans}")
 
 
+'''
+Печатает коллекцию стран в консоль.
+'''
+def show_countries(countries: List[Country], message = "") -> None:
+    len(message) > 0 and print(message)
+    for country in countries:
+        print(country)
+
+
+'''
+Функция для задания 10.
+'''
+def process_countries_data() -> None:
+    countries_dict: Dict = get_countries(COUNTRIES_DATA_FILE_NAME)
+    countries: List[Country] = [Country.dict_to_country(d) for d in countries_dict]
+    sorted_countries: List[Country] = sorted(countries, key=lambda country: country.name)
+    show_countries(sorted_countries, 'Сортировка по названию')
+
+    sorted_countries = sorted(countries, key=lambda country: country.capital)
+    show_countries(sorted_countries, 'Сортировка по столице')
+
+    sorted_countries = sorted(countries, key=lambda country: country.population)
+    show_countries(sorted_countries, 'Сортировка по населению')
+
+
 if __name__ == '__main__':
-    countries: List[str] = get_countries()
+    countries: List[str] = get_countries(COUNTRIES_FILE_NAME)
     built_in_functions_test(countries)
     construct_countries_sentence(countries)
     higher_rank_functions(countries)
     currying_test(countries)
+    process_countries_data()

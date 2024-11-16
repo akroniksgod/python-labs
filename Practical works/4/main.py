@@ -1,7 +1,8 @@
 import json
 from functools import reduce
-from typing import List, Dict, Callable, TypeVar
+from typing import List, Dict, Callable, TypeVar, Tuple
 from country import Country
+from collections import defaultdict
 
 '''
 Шаблонный тип.
@@ -170,19 +171,60 @@ def show_countries(countries: List[Country], message = "") -> None:
 
 
 '''
+Выполняет подсчёт количества стран, использующих каждый язык.
+'''
+def count_languages(countries: List[Country]) -> Dict[str, int]:
+    def update_language_count(acc: Dict[str, int], country: Country) -> Dict[str, int]:
+        for language in country.languages:
+            acc[language] = acc.get(language, 0) + 1
+        return acc
+
+    return reduce(update_language_count, countries, defaultdict(int))
+
+
+'''
+Собирает список стран, использующих каждый язык.
+'''
+def collect_language_countries(countries: List[Country]) -> Dict[str, List[str]]:
+    def update_language_countries(acc: Dict[str, List[str]], country: Country) -> Dict[str, List[str]]:
+        for language in country.languages:
+            acc[language].append(country.name)
+        return acc
+
+    return reduce(update_language_countries, countries, defaultdict(list))
+
+
+'''
+Печатает список распространенных языков и где их используют.
+'''
+def show_top_n_countries(countries: List[Country], n: int) -> None:
+    language_count: Dict[str, int] = count_languages(countries)
+    language_countries: Dict[str, List[str]] = collect_language_countries(countries)
+    sorted_languages: List[Tuple[str, int]] = sorted(language_count.items(), key=lambda x: x[1], reverse=True)
+    top_n_languages_list: List[Tuple[str, int]] = sorted_languages[:n]
+
+    for language, count in top_n_languages_list:
+        print(f"Язык: {language}, Количество стран: {count}")
+        print(f"Страны: {', '.join(language_countries[language])}")
+        print()
+
+
+'''
 Функция для задания 10.
 '''
 def process_countries_data() -> None:
     countries_dict: Dict = get_countries(COUNTRIES_DATA_FILE_NAME)
     countries: List[Country] = [Country.dict_to_country(d) for d in countries_dict]
     sorted_countries: List[Country] = sorted(countries, key=lambda country: country.name)
-    show_countries(sorted_countries, 'Сортировка по названию')
+    show_countries(sorted_countries, '10.1.1 Сортировка по названию')
 
     sorted_countries = sorted(countries, key=lambda country: country.capital)
-    show_countries(sorted_countries, 'Сортировка по столице')
+    show_countries(sorted_countries, '10.1.2 Сортировка по столице')
 
     sorted_countries = sorted(countries, key=lambda country: country.population)
-    show_countries(sorted_countries, 'Сортировка по населению')
+    show_countries(sorted_countries, '10.1.3 Сортировка по населению')
+
+    show_top_n_countries(countries, 10)
 
 
 if __name__ == '__main__':

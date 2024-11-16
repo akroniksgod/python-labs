@@ -124,8 +124,32 @@ def higher_rank_functions(countries: List[str]) -> None:
     print(f'8.5 {apply_filter_to_countries(countries, filter_func)}')
 
 
+'''
+Функция для задания 9.
+'''
+def currying_test(countries: List[str]) -> None:
+    def categorize_countries(initial_pattern: str):
+        def categorize(countries: List[str]) -> List[str]:
+            return [country for country in countries if initial_pattern in country]
+
+        return categorize
+
+    lands: List[str] = categorize_countries('land')(countries)
+    print(f"9.1 lands: {lands}")
+
+    ias: List[str] = categorize_countries('ia')(countries)
+    print(f"9.2 ias: {ias}")
+
+    islands: List[str] = categorize_countries('island')(countries)
+    print(f"9.3 islands: {islands}")
+
+    stans: List[str] = categorize_countries('stan')(countries)
+    print(f"9.4 stans: {stans}")
+
+
 if __name__ == '__main__':
     countries: List[str] = get_countries()
     built_in_functions_test(countries)
     construct_countries_sentence(countries)
     higher_rank_functions(countries)
+    currying_test(countries)

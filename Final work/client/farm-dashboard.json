@@ -1,0 +1,461 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "grafana",
+          "uid": "-- Grafana --"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "id": 1,
+  "links": [],
+  "panels": [
+    {
+      "datasource": {
+        "uid": "fast-api"
+      },
+      "description": "rainfall all",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": "auto",
+            "cellOptions": {
+              "type": "auto"
+            },
+            "inspect": false
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 0
+      },
+      "id": 1,
+      "options": {
+        "cellHeight": "sm",
+        "footer": {
+          "countRows": false,
+          "enablePagination": true,
+          "fields": "",
+          "reducer": [
+            "sum"
+          ],
+          "show": false
+        },
+        "frameIndex": 0,
+        "showHeader": true,
+        "sortBy": [
+          {
+            "desc": true,
+            "displayName": "states"
+          }
+        ]
+      },
+      "pluginVersion": "11.4.0",
+      "targets": [
+        {
+          "cacheDurationSeconds": 5,
+          "fields": [
+            {
+              "jsonPath": "$.[states]",
+              "language": "jsonpath",
+              "name": "Территория"
+            },
+            {
+              "jsonPath": "$.[yearly_rainfall]",
+              "language": "jsonpath",
+              "name": "Годовое количество осадков"
+            },
+            {
+              "jsonPath": "$.[kharif_rainfall]",
+              "language": "jsonpath",
+              "name": "Осадки в период харифа"
+            },
+            {
+              "jsonPath": "$.[rabi_rainfall]",
+              "language": "jsonpath",
+              "name": "Осадки в сезон Раби"
+            },
+            {
+              "jsonPath": "$.[summer_rainfall]",
+              "language": "jsonpath",
+              "name": "Летние осадки"
+            }
+          ],
+          "method": "GET",
+          "queryParams": "",
+          "refId": "Таблица осадков",
+          "urlPath": "/api/rainfall/all"
+        },
+        {
+          "cacheDurationSeconds": 300,
+          "datasource": {
+            "type": "marcusolsson-json-datasource",
+            "uid": "fast-api"
+          },
+          "fields": [
+            {
+              "jsonPath": "$",
+              "name": "Все данные"
+            }
+          ],
+          "hide": false,
+          "method": "GET",
+          "queryParams": "",
+          "refId": "Коллекция с сервера",
+          "urlPath": "/api/rainfall/all"
+        }
+      ],
+      "title": "Таблица осадков",
+      "type": "table"
+    },
+    {
+      "datasource": {
+        "type": "marcusolsson-json-datasource",
+        "uid": "fast-api"
+      },
+      "description": "temperature all",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": "auto",
+            "cellOptions": {
+              "type": "auto"
+            },
+            "inspect": false
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 0
+      },
+      "id": 2,
+      "options": {
+        "cellHeight": "sm",
+        "footer": {
+          "countRows": false,
+          "enablePagination": true,
+          "fields": "",
+          "reducer": [
+            "sum"
+          ],
+          "show": false
+        },
+        "frameIndex": 0,
+        "showHeader": true
+      },
+      "pluginVersion": "11.4.0",
+      "targets": [
+        {
+          "cacheDurationSeconds": 300,
+          "datasource": {
+            "type": "marcusolsson-json-datasource",
+            "uid": "fast-api"
+          },
+          "fields": [
+            {
+              "jsonPath": "$.[state]",
+              "name": "Территория"
+            },
+            {
+              "jsonPath": "$.[kharif_temp]",
+              "language": "jsonpath",
+              "name": "Температура в период хариф"
+            },
+            {
+              "jsonPath": "$.[rabi_temp]",
+              "language": "jsonpath",
+              "name": "Температура в период раби"
+            },
+            {
+              "jsonPath": "$.[summer_temp]",
+              "language": "jsonpath",
+              "name": "Летняя температура"
+            },
+            {
+              "jsonPath": "$.[yearly_temp]",
+              "language": "jsonpath",
+              "name": "Годовая температура"
+            }
+          ],
+          "hide": false,
+          "method": "GET",
+          "queryParams": "",
+          "refId": "Температура",
+          "urlPath": "/api/temperature/all"
+        },
+        {
+          "cacheDurationSeconds": 300,
+          "fields": [
+            {
+              "jsonPath": "$",
+              "name": "Все данные"
+            }
+          ],
+          "method": "GET",
+          "queryParams": "",
+          "refId": "Данные с сервера",
+          "urlPath": "/api/temperature/all"
+        }
+      ],
+      "title": "Таблица температур",
+      "type": "table"
+    },
+    {
+      "datasource": {
+        "type": "marcusolsson-json-datasource",
+        "uid": "fast-api"
+      },
+      "description": "Годовые осдаки по территории",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "fillOpacity": 80,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineWidth": 1,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 8
+      },
+      "id": 3,
+      "options": {
+        "barRadius": 0,
+        "barWidth": 0.7,
+        "fullHighlight": false,
+        "groupWidth": 0.7,
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "orientation": "auto",
+        "showValue": "auto",
+        "stacking": "normal",
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        },
+        "xField": "states",
+        "xTickLabelRotation": -45,
+        "xTickLabelSpacing": 0
+      },
+      "pluginVersion": "11.4.0",
+      "targets": [
+        {
+          "cacheDurationSeconds": 300,
+          "fields": [
+            {
+              "jsonPath": "$.[states]",
+              "name": "Территория"
+            },
+            {
+              "jsonPath": "$.[yearly_rainfall]",
+              "language": "jsonpath",
+              "name": "Годовые осадки"
+            }
+          ],
+          "method": "GET",
+          "queryParams": "",
+          "refId": "A",
+          "urlPath": "/api/rainfall/all"
+        }
+      ],
+      "title": "Годовые осдаки по территории",
+      "type": "barchart"
+    },
+    {
+      "datasource": {
+        "type": "marcusolsson-json-datasource",
+        "uid": "fast-api"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            }
+          },
+          "mappings": []
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 8
+      },
+      "id": 4,
+      "options": {
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "pieType": "pie",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "11.4.0",
+      "targets": [
+        {
+          "cacheDurationSeconds": 300,
+          "fields": [
+            {
+              "jsonPath": "$.[state]",
+              "name": "Территория"
+            },
+            {
+              "jsonPath": "$.[summer_temp]",
+              "language": "jsonpath",
+              "name": "Летняя"
+            },
+            {
+              "jsonPath": "$.[yearly_temp]",
+              "language": "jsonpath",
+              "name": "Годовая"
+            },
+            {
+              "jsonPath": "$.[rabi_temp]",
+              "language": "jsonpath",
+              "name": "Период раби"
+            },
+            {
+              "jsonPath": "$.[kharif_temp]",
+              "language": "jsonpath",
+              "name": "Период хариф"
+            }
+          ],
+          "method": "GET",
+          "queryParams": "",
+          "refId": "Значения температур",
+          "urlPath": "/api/temperature/all"
+        }
+      ],
+      "title": "Средние температуры",
+      "type": "piechart"
+    }
+  ],
+  "preload": false,
+  "schemaVersion": 40,
+  "tags": [],
+  "templating": {
+    "list": []
+  },
+  "time": {
+    "from": "now-6h",
+    "to": "now"
+  },
+  "timepicker": {},
+  "timezone": "browser",
+  "title": "Farm dashboard",
+  "uid": "fe67wyuhxnev4e",
+  "version": 11,
+  "weekStart": ""
+}
